@@ -151,3 +151,47 @@ void left_shift(node *p, int x) {
 	(p->str)[k-1] = '\0';
 
 }
+
+void delete_line(WINDOW* w, list *l, int k, int m) {
+    node* p;
+    int i, pos = m;
+    if(pos < 0 || pos >= l->len)
+        return ;
+    p = l->head;
+    for(i = 0; i < pos; i++)
+        p = p->next;
+    if(l->head->next == NULL)
+        l->head = NULL;
+    else if(pos == 0) {
+        p->next->prev = NULL;
+        l->head = p->next;
+        p->next = NULL;
+    }
+    else if(pos == l->len -1 ) {
+        p->prev->next = NULL;
+        l->tail = p->prev;
+        p->prev = NULL;
+    }
+    else {
+        p->next->prev = p->prev;
+        p->prev->next = p->next;
+        p->next = NULL;
+        p->prev = NULL;
+    }
+    l->len--;
+
+}
+
+void color_traverse(WINDOW* ww, list* l, int k, int m, int clx, int cly){
+    start_color();
+    init_pair(3, COLOR_BLACK, COLOR_BLUE);
+    node *p = l->head;
+    int i;
+    while(p != NULL) {
+        for(i = 0;(p->str)[i] != '\0'; i++) {
+            wprintw(ww, "%c", (p->str)[i]);
+        }
+        p = p->next;
+    }
+    mvwchgat(ww, m, k, k-clx, A_BLINK, 3, NULL);
+}

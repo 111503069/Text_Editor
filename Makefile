@@ -1,5 +1,5 @@
-editor : editormain.o datastructure.o filefunctions.o
-	cc editormain.o datastructure.o filefunctions.o -o editor -lncurses
+project : editormain.o datastructure.o filefunctions.o
+	cc editormain.o datastructure.o filefunctions.o -o project -lncurses
 editormain.o: editormain.c datastructure.h filefunctions.h
 	cc -Wall -c editormain.c
 datstructure.o:  datastructure.c datastructure.h
