@@ -21,4 +21,5 @@ int length(list *l);
 void shift(node* p, int x);
 void left_shift(node* p, int x);
 //void print(WINDOW* w, char* c , FILE* f) ;
+void delete_line(WINDOW* w, list *l, int k, int m);
 #endif
